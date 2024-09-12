@@ -16,14 +16,6 @@ class Car(UUIDModel):
     year_built = models.DateField()
     mileage = models.IntegerField(validators=[MinValueValidator(0)])
 
-    class Meta:
-        constraints = [
-            CheckConstraint(
-                check=Q(price__gt=0),
-                name="price_must_be_greater_than_zero"
-            ),
-        ]
-
     def get_price(self, brand, year_built):
         # TODO: Complete here using cache
         # FIXME: use `from functools import cache`
