@@ -1,3 +1,5 @@
+from functools import cache
+
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from model_utils.models import UUIDModel
@@ -16,7 +18,9 @@ class Car(UUIDModel):
     year_built = models.DateField()
     mileage = models.IntegerField(validators=[MinValueValidator(0)])
 
+    @cache
     def get_price(self, brand, year_built):
-        # TODO: Complete here using cache
-        # FIXME: use `from functools import cache`
-        pass
+        return len(brand) * year_built * 100
+    
+    def get_price_cache_info(self):
+        return self.get_price.cache_info()
