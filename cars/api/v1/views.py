@@ -9,7 +9,7 @@ from cars.api.v1.mixins import CarCreateMixin
 class CarViewSet(GenericViewSet, CarCreateMixin, ListModelMixin, DestroyModelMixin, UpdateModelMixin):
     queryset = Car.objects.all()
     serializer_class = CarSerializer
-    lookup_field = 'uuid'
+    lookup_field = 'id'
     lookup_url_kwarg = 'uuid'
 
     filter_backends = [DjangoFilterBackend]
